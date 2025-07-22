@@ -26,7 +26,6 @@ Follow these steps to get the project running locally.
 ### 2. Clone the Repository
 ```bash
 git clone https://github.com/Adityaveer756/Best-Offer-Detection-System.git
-cd best-offer-detection-system
 ```
 
 ### 3. Install Dependencies
