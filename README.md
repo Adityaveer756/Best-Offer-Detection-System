@@ -71,14 +71,92 @@ This endpoint receives the complete JSON response from Flipkart's offer API, par
     ```json
     {
       "flipkartOfferApiResponse": {
-        // ... JSON from Flipkart's API
+        "offers": [
+          {
+            "id": "OFFER1",
+            "title": "10% Instant Discount on Axis Bank Credit Cards",
+            "description": "Get 10% instant discount up to ₹500 on Axis Bank Credit Cards.",
+            "bank": "AXIS",
+            "discountType": "PERCENTAGE",
+            "discountValue": 10,
+            "maxDiscountAmount": 500,
+            "paymentInstruments": ["CREDIT"],
+            "terms": "Valid on minimum purchase of ₹3000. T&C apply."
+          },
+          {
+            "id": "OFFER2",
+            "title": "Flat ₹200 off on IDFC FIRST Bank Debit Cards",
+            "description": "Flat ₹200 off on transactions with IDFC FIRST Bank Debit Cards.",
+            "bank": "IDFC",
+            "discountType": "FLAT",
+            "discountValue": 200,
+            "maxDiscountAmount": null,
+            "paymentInstruments": ["DEBIT"],
+            "terms": "Valid once per user. T&C apply."
+          },
+          {
+            "id": "OFFER3",
+            "title": "5% Cashback on EMI Transactions",
+            "description": "Get 5% cashback up to ₹300 on EMI transactions using HDFC Bank Cards.",
+            "bank": "HDFC",
+            "discountType": "PERCENTAGE",
+            "discountValue": 5,
+            "maxDiscountAmount": 300,
+            "paymentInstruments": ["EMI_OPTIONS"],
+            "terms": "Applicable only on EMI. T&C apply."
+          }
+        ]
       }
     }
+    ```
+*   **Example cURL:**
+    ```bash
+    curl -X POST http://localhost:3000/offer \
+      -H "Content-Type: application/json" \
+      -d '{
+        "flipkartOfferApiResponse": {
+          "offers": [
+            {
+              "id": "OFFER1",
+              "title": "10% Instant Discount on Axis Bank Credit Cards",
+              "description": "Get 10% instant discount up to ₹500 on Axis Bank Credit Cards.",
+              "bank": "AXIS",
+              "discountType": "PERCENTAGE",
+              "discountValue": 10,
+              "maxDiscountAmount": 500,
+              "paymentInstruments": ["CREDIT"],
+              "terms": "Valid on minimum purchase of ₹3000. T&C apply."
+            },
+            {
+              "id": "OFFER2",
+              "title": "Flat ₹200 off on IDFC FIRST Bank Debit Cards",
+              "description": "Flat ₹200 off on transactions with IDFC FIRST Bank Debit Cards.",
+              "bank": "IDFC",
+              "discountType": "FLAT",
+              "discountValue": 200,
+              "maxDiscountAmount": null,
+              "paymentInstruments": ["DEBIT"],
+              "terms": "Valid once per user. T&C apply."
+            },
+            {
+              "id": "OFFER3",
+              "title": "5% Cashback on EMI Transactions",
+              "description": "Get 5% cashback up to ₹300 on EMI transactions using HDFC Bank Cards.",
+              "bank": "HDFC",
+              "discountType": "PERCENTAGE",
+              "discountValue": 5,
+              "maxDiscountAmount": 300,
+              "paymentInstruments": ["EMI_OPTIONS"],
+              "terms": "Applicable only on EMI. T&C apply."
+            }
+          ]
+        }
+      }'
     ```
 *   **Success Response:**
     ```json
     {
-      "noOfOffersIdentified": 5,
+      "noOfOffersIdentified": 3,
       "noOfNewOffersCreated": 3
     }
     ```
@@ -90,7 +168,7 @@ This endpoint calculates the highest possible discount for a given amount, bank,
     *   `amountToPay` (number): The total amount of the transaction.
     *   `bankName` (string): The name of the bank (e.g., `AXIS`, `IDFC`).
     *   `paymentInstrument` (string, optional): The payment method (e.g., `CREDIT`, `EMI_OPTIONS`).
-*   **Example Request:**
+*   **Example cURL:**
     ```bash
     curl "http://localhost:3000/highest-discount?amountToPay=10000&bankName=AXIS&paymentInstrument=CREDIT"
     ```
